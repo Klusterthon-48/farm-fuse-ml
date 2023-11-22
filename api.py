@@ -10,9 +10,23 @@ model = pickle.load(open('model.pkl', 'rb'))
 scaler = pickle.load(open('scaler.pkl', 'rb'))
 encoder = pickle.load(open('encoder.pkl', 'rb'))
 
+@app.route('/')
+def home():
+    return 'Welcome!'
+
+
 # Define the API endpoint for model predictions
 @app.route('/predict', methods=['POST'])
 def predict():
+    """
+    Make predictions based on input data.
+
+    Parameters:
+    - features (dict): Dictionary containing 'categorical_features' and 'numeric_features'.
+
+    Returns:
+    - predictions (dict): Dictionary containing prediction details.
+    """
     try:
         # Get input data from the request
         input_data = request.get_json()
