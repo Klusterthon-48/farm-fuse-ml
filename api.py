@@ -10,11 +10,6 @@ model = pickle.load(open('model.pkl', 'rb'))
 scaler = pickle.load(open('scaler.pkl', 'rb'))
 encoder = pickle.load(open('encoder.pkl', 'rb'))
 
-@app.route('/')
-def home():
-    return 'Welcome!'
-
-
 # Define the API endpoint for model predictions
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -23,6 +18,18 @@ def predict():
 
     Parameters:
     - features (dict): Dictionary containing 'categorical_features' and 'numeric_features'.
+
+        categorical_features:
+        season (planting season)
+        label (crop)
+        location (country)
+
+
+        numeric_features:
+        temperature
+        humidity
+        ph
+        water availability
 
     Returns:
     - predictions (dict): Dictionary containing prediction details.
@@ -33,27 +40,27 @@ def predict():
 
         
         # Validate input format
-        if 'features' not in input_data or not isinstance(input_data['features'], dict):
+        if 'features' not in input_data or not isinstance(input_data["features"], dict):
             raise ValueError("Invalid input format. 'features' should be a dictionary.")
         
 
         # Extract features from input data
-        features = input_data['features']
+        features = input_data["features"]
 
         
         # Validate presence of required keys
-        required_keys = ['categorical_features', 'numeric_features']
+        required_keys = ["categorical_features", "numeric_features"]
         for key in required_keys:
             if key not in features:
                 raise ValueError(f"Missing required key: {key}")
             
 
         # Label encode categorical features
-        labeled_categories = encoder.fit_transform(features['categorical_features'])
+        labeled_categories = encoder.fit_transform(features["categorical_features"])
         labeled_categories = np.array([labeled_categories]).reshape(1, -1)
-
-        # Dummy scaling, replace with your preprocessing logic
-        features_scaled = scaler.transform(np.array(features['numeric_features']).reshape(1, -1))
+        
+        #scaling numerical features
+        features_scaled = scaler.transform(np.array(features["numeric_features"]).reshape(1, -1))
 
         # Concatenate encoded and scaled features
         processed_features = np.concatenate([labeled_categories, features_scaled], axis=1)
@@ -66,17 +73,17 @@ def predict():
 
         predicted_season = ''
         if predicted_class == 0:
-            predicted_season = 'rainy'
+            predicted_season = "rainy"
         elif predicted_class == 1:
-            predicted_season ='spring'
+            predicted_season ="spring"
         elif predicted_class == 2:
-            predicted_season = 'summer'
+            predicted_season = "summer"
         elif predicted_class == 3:
-            predicted_season = 'winter'
+            predicted_season = "winter"
 
         
         # Format the predictions along with additional details
-        result = {'Your predicted harvest season is': predicted_season}
+        result = {"Predicted harvest season": predicted_season}
 
         return jsonify(result)
 
