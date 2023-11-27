@@ -15,8 +15,9 @@ To develop a machine learning system that predicts the best planting and harvest
 ## Results
 A random forest model of 0.94 F1 score on the test set was deployed to production.
 
-Deployment
-Link: 
+[Deployment
+Link:](https://github.com/Klusterthon-48/flask-api) : [Flask API](https://drab-teal-armadillo.cyclic.app/predicthttps://unsplash.com/photos/brown-wooden-board-p2OQW69vXP4)
 
 ## Technology Used:
-Python
+- Python
+- Flask
