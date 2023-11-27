@@ -1,3 +1,22 @@
 # Precision Farming for Best Product Results with Data
 ## Problem Statement
 To develop a machine learning system that predicts the best planting and harvesting times
+
+## Approach
+- Data Loading
+- Data Validation
+- Feature Pre-processing
+- Train-test Split
+- Modeling
+- Model Evaluation
+- Feature Importance
+- Model Deployment
+
+## Results
+A random forest model of 0.94 F1 score on the test set was deployed to production.
+
+Deployment
+Link: 
+
+## Technology Used:
+Python
