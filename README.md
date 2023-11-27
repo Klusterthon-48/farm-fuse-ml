@@ -12,6 +12,17 @@ To develop a machine learning system that predicts the best planting and harvest
 - Feature Importance
 - Model Deployment
 
+## Features available:
+- temperature
+- ph
+- humidity
+- water availability
+- label (crop)
+- location
+
+## Target
+Harvest season
+
 ## Results
 A random forest model of 0.94 F1 score on the test set was deployed to production.
 
